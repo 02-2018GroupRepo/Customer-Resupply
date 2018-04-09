@@ -1,4 +1,6 @@
-package com.customer.app;
+package com.customer.app.model.invoice;
+
+import com.customer.app.model.product.Product;;
 
 public class InvoiceItem {
 	
