@@ -7,6 +7,8 @@ public class Invoice {
 	int id;
 	List<InvoiceItem> items;
 	
+	public Invoice() { }
+	
 	public Invoice(int id, List<InvoiceItem> items) {
 		this.id = id;
 		this.items = items;

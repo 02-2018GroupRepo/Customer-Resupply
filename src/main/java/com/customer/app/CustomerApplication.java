@@ -9,6 +9,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import com.customer.app.dao.ProductDao;
+import com.customer.app.service.InvoiceService;
+import com.customer.app.service.ProductService;
 
 @SpringBootApplication
 @EnableScheduling
@@ -16,15 +18,20 @@ import com.customer.app.dao.ProductDao;
 public class CustomerApplication {
 	
 	@Autowired
-	private ProductDao dao;
+	private InvoiceService invoiceService;
+	
+	@Autowired
+	private ProductService productService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CustomerApplication.class, args);
 	}
 	
-	@Scheduled(cron = "*/5 * * * * *")
-	public void callDao() {
-		dao.getAllProducts();
+	@Scheduled(cron = "*/10 * * * * *")
+	public void callDao() throws InterruptedException {
+		invoiceService.sendInvoice(productService.getAllProducts(), "http://localhost:3000");
+		invoiceService.sendInvoice(productService.getAllProducts(), "http://localhost:3001");
+		invoiceService.sendInvoice(productService.getAllProducts(), "http://localhost:3002");
 	}
 	
 }

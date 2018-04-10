@@ -37,7 +37,7 @@ public class ProductService {
 	
 	@Async
 	public CompletableFuture<ArrayList<Product>> getAllProducts() {
-		ArrayList<Product> productList = (ArrayList) productDao.getAllProducts();
+		ArrayList<Product> productList = (ArrayList<Product>) productDao.getAllProducts();
 		return CompletableFuture.completedFuture(productList);
 	}
 	
