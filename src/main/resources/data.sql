@@ -61,3 +61,6 @@ values
 (59,'Spinach','', 1.75, .43),
 (60,'Pillow','', 5.00, 2.29)
 ;
+
+INSERT INTO invoice
+VALUES (1, 0);

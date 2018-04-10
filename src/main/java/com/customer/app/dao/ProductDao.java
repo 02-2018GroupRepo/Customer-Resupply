@@ -27,4 +27,5 @@ public class ProductDao {
 		log.info("Products: " + allProducts);
 		return allProducts;
 	}
+	
 }
