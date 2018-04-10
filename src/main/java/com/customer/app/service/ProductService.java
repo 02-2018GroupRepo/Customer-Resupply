@@ -27,9 +27,9 @@ public class ProductService {
 		return new BigDecimal(Math.floor((Math.random() * 11) / 100));
 	}
 	
-	public static List<Integer> randomProductIds() {
+	public static List<Integer> randomProductIds(int num) {
 		List<Integer> productIdList = new ArrayList<>();
-		while (productIdList.size() < 10) {
+		while (productIdList.size() < num) {
 			productIdList.add((int) Math.floor(Math.random() * 60) + 1);
 		}
 		return productIdList;

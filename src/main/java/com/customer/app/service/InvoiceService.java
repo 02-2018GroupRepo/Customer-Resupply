@@ -23,7 +23,7 @@ public class InvoiceService {
 		ArrayList<InvoiceItem> invoiceItemList = new ArrayList<InvoiceItem>();
 		products.thenAccept((arr) -> {
 			arr.stream()
-			   .filter(item -> ProductService.randomProductIds().indexOf(item.getId()) != -1)
+			   .filter(item -> ProductService.randomProductIds(10).indexOf(item.getId()) != -1)
 			   .forEach(item -> {
 				item.setWholesale_price(ProductService.randomPrice(item.getWholesale_price()));
 				invoiceItemList.add(new InvoiceItem(item, ProductService.randomQty()));
