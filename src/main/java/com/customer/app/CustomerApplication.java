@@ -76,6 +76,8 @@ public class CustomerApplication {
 		products.add(product3);
 
 		restTemplate.postForObject("http://18.236.70.220:5500/receive/inventory", products, List.class);
+		restTemplate.postForObject("http://18.236.70.220:5501/inventory/receive", products, List.class);
+		restTemplate.postForObject("http://18.236.70.220:5502/inventory/receive", products, List.class);
 
 		
 	}
