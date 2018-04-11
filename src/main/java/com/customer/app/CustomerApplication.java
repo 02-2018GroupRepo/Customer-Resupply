@@ -37,9 +37,9 @@ public class CustomerApplication {
 		SpringApplication.run(CustomerApplication.class, args);
 	}
 	
-	@Scheduled(cron = "*/5 * * * * *")
+	//@Scheduled(cron = "*/10 * * * * *")
 	public void callDao() throws InterruptedException {
-		invoiceService.sendInvoice(productService.getAllProducts(), "http://localhost:3000");
+		invoiceService.sendInvoice(productService.getAllProducts(), "http://192.168.88.45:8080/invoice/receive");
 //		invoiceService.sendInvoice(productService.getAllProducts(), "http://localhost:3001");
 //		invoiceService.sendInvoice(productService.getAllProducts(), "http://localhost:3002");
 //		HashMap<Integer, Integer> test = new HashMap<>();

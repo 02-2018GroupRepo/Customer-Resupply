@@ -3,7 +3,11 @@ package com.customer.app.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.customer.app.dao.LocalDao;
+import com.customer.app.dao.Payment;
 import com.customer.app.model.invoice.Invoice;
 import com.customer.app.model.product.Product;
 import com.customer.app.service.InvoiceService;
@@ -26,14 +32,17 @@ public class ProductController {
 	@Autowired
 	private LocalDao localDao;
 	
+	@Autowired
+	RestTemplate restTemplate;
+	
 	@RequestMapping("/payment/{id}")
 	@ResponseBody
-	public List<Product> recievePayment(@PathVariable int id, @RequestBody Double payment) {
-		System.out.println(localDao.validateTotal(id, payment));
-		List<Product> productList = localDao.validateTotal(id, payment) ? localDao.getProductList(id) 
+	public void recievePayment(@PathVariable int id, @RequestBody Payment paymentObject) {
+//		"/inventory/receive"
+		String url = "";
+		List<Product> productList = localDao.validateTotal(id, paymentObject.getPayment()) ? localDao.getProductList(id) 
 										    							: new ArrayList<Product>();
-		return productList;
+		restTemplate.postForObject(url, productList, List.class);
 	}
 	
-
 }

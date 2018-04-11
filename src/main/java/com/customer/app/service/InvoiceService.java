@@ -41,7 +41,11 @@ public class InvoiceService {
 			});
 			int invoiceId = (int) Math.floor(Math.random() * 100000000);
 			localDao.addInvoice(invoiceId, invoiceItemList);
-			restTemplate.postForEntity(url, new Invoice(invoiceId, invoiceItemList), Invoice.class);
+			try {
+				restTemplate.postForEntity(url, new Invoice(invoiceId, invoiceItemList), Invoice.class);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
 		});
 
 	}
