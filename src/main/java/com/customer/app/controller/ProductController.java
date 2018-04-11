@@ -1,5 +1,6 @@
 package com.customer.app.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import org.springframework.web.client.RestTemplate;
 import com.customer.app.dao.LocalDao;
 import com.customer.app.dao.Payment;
 import com.customer.app.model.invoice.Invoice;
+import com.customer.app.model.product.Order;
 import com.customer.app.model.product.Product;
 import com.customer.app.service.InvoiceService;
 
@@ -39,10 +41,28 @@ public class ProductController {
 	@ResponseBody
 	public void recievePayment(@PathVariable int id, @RequestBody Payment paymentObject) {
 //		"/inventory/receive"
-		String url = "";
-		List<Product> productList = localDao.validateTotal(id, paymentObject.getPayment()) ? localDao.getProductList(id) 
-										    							: new ArrayList<Product>();
-		restTemplate.postForObject(url, productList, List.class);
+		String url = "http://192.168.88.189:8080/inventory/receive";
+		
+		System.out.println(paymentObject.getPaymentForProduct());
+		
+		try {
+//			List<Product> productList = localDao.validateTotal(id, paymentObject.getPaymentForProduct().doubleValue()) ? localDao.getProductList(id) 
+//					   : new ArrayList<Product>();
+			
+			ArrayList<Product> products = new ArrayList<>();
+			Product product = new Product();
+			product.setDescription("");
+			product.setId(60);
+			product.setRetail_price(new BigDecimal(5.00));
+			product.setWholesale_price(new BigDecimal(2.29));
+			
+			
+			
+			restTemplate.postForObject(url, products.add(product), List.class);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
+	
 	
 }

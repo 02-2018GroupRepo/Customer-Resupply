@@ -1,19 +1,41 @@
 package com.customer.app.dao;
 
+import java.math.BigDecimal;
+
 public class Payment {
 	
-	private double payment;
+//	private BigDecimal payment;
+//
+//	public BigDecimal getPayment() {
+//		return payment;
+//	}
+//
+//	public void setPayment(BigDecimal payment) {
+//		this.payment = payment;
+//	}
+	
+	private BigDecimal paymentForProduct;
+    private int invoiceId;
 
-	public double getPayment() {
-		return payment;
-	}
+    public BigDecimal getPaymentForProduct() {
+        return paymentForProduct;
+    }
 
-	public void setPayment(double payment) {
-		this.payment = payment;
-	}
+    public void setPaymentForProduct(BigDecimal paymentForProduct) {
+        this.paymentForProduct = paymentForProduct;
+    }
+
+    public int getInvoiceId() {
+        return invoiceId;
+    }
+
+    public void setInvoiceId(int invoiceId) {
+        this.invoiceId = invoiceId;
+    }
 
 
 	
 	
 
 }
+

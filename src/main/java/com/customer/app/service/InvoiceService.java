@@ -39,10 +39,11 @@ public class InvoiceService {
 				item.setWholesale_price(ProductService.randomPrice(item.getWholesale_price()));
 				invoiceItemList.add(new InvoiceItem(item, ProductService.randomQty()));
 			});
+			System.out.println(invoiceItemList.get(0).getProduct().getWholesale_price());
 			int invoiceId = (int) Math.floor(Math.random() * 100000000);
 			localDao.addInvoice(invoiceId, invoiceItemList);
 			try {
-				restTemplate.postForEntity(url, new Invoice(invoiceId, invoiceItemList), Invoice.class);
+				restTemplate.postForEntity("http://192.168.88.189:8080/inventory/receive", new Invoice(invoiceId, invoiceItemList), Invoice.class);
 			} catch (Exception e) {
 				System.out.println(e);
 			}

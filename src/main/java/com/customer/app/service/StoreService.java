@@ -2,10 +2,13 @@ package com.customer.app.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import com.customer.app.model.product.Order;
 
 @Service
 public class StoreService {
@@ -13,26 +16,42 @@ public class StoreService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	public HashMap<Integer, Integer> getStoreInventory() {
-		return restTemplate.getForObject("http://localhost:3000", HashMap.class);
+	public Hashtable<Integer, Integer> getStoreInventory() {
+		System.out.println("GET STORE INVENTORY");
+		return restTemplate.getForObject("http://192.168.88.11:8080/inventory/all", Hashtable.class);
 	}
 
-	public HashMap<Integer, Integer> createOrder() {
-		HashMap<Integer, Integer> orderMap = new HashMap<>();
-		HashMap<Integer, Integer> storeInventory = this.getStoreInventory();
+	public Hashtable<Integer, Integer> createOrder(Hashtable<Integer, Integer> storeInventory) {
+		Hashtable<Integer, Integer> orderMap = new Hashtable<>();
+	
+		System.out.println(storeInventory.get("1"));
 		ArrayList<Integer> randomProductIDs = (ArrayList<Integer>) ProductService.randomProductIds(3);
 		// set 20 random item id and quantity where the store quantity is not 0
 		int i = 0;
 		while (orderMap.size() < 8) {
-			int productQuantity = storeInventory.get(randomProductIDs.get(i));
+		try {
+			
+			
+			int productQuantity = storeInventory.get(i + 1);
 			if (productQuantity > 0) {
 				orderMap.put(i, (int) (Math.floor(Math.random() * productQuantity) + 1));
+				Order order = new Order(i, (int) (Math.floor(Math.random() * productQuantity) + 1));
+				restTemplate.postForObject("http://192.168.88.11:8080/inventory/purchase", new Order(), Order.class);
 			}
 			i++;
+		} catch (Exception e) {
+			System.out.println(e);
 		}
+		}
+		System.out.println("ORDER MAP:" + orderMap);
 		return orderMap;
 	}
 	public void sendOrder() {
-		restTemplate.postForObject("http://localhost:3000", this.createOrder(), HashMap.class);
+		System.out.println("SEND ORDER");
+		Hashtable<Integer, Integer> storeInventory = this.getStoreInventory();
+		Hashtable<Integer, Integer> orderMap = this.createOrder(storeInventory);
+		
+		
+		//restTemplate.postForObject("http://192.168.88.11:8080/inventory/purchase", orderMap, HashMap.class);
 	}
 }
