@@ -42,52 +42,15 @@ public class CustomerApplication {
 		SpringApplication.run(CustomerApplication.class, args);
 	}
 
-	@Scheduled(cron = "1 * * * * *")
-	public void callDao() throws InterruptedException {
-		
-		ArrayList<Product> products = new ArrayList<>();
-		Product product = new Product();
-		product.setDescription("");
-		product.setId(59);
-		product.setRetail_price(new BigDecimal(5.00));
-		product.setWholesale_price(new BigDecimal(2.29));
-
-		Product product1 = new Product();
-		product1.setDescription("");
-		product1.setId(58);
-		product1.setRetail_price(new BigDecimal(5.00));
-		product1.setWholesale_price(new BigDecimal(2.29));
-
-		Product product2 = new Product();
-		product2.setDescription("");
-		product2.setId(57);
-		product2.setRetail_price(new BigDecimal(5.00));
-		product2.setWholesale_price(new BigDecimal(2.29));
-
-		Product product3 = new Product();
-		product3.setDescription("");
-		product3.setId(56);
-		product3.setRetail_price(new BigDecimal(5.00));
-		product3.setWholesale_price(new BigDecimal(2.29));
-
-		products.add(product);
-		products.add(product1);
-		products.add(product2);
-		products.add(product3);
-
-		restTemplate.postForObject("http://18.236.70.220:5500/receive/inventory", products, List.class);
-		restTemplate.postForObject("http://18.236.70.220:5501/inventory/receive", products, List.class);
-		restTemplate.postForObject("http://18.236.70.220:5502/inventory/receive", products, List.class);
+// 	@Scheduled(cron = "1 * * * * *")
+// 	public void callDao() throws InterruptedException {
 
 		
-	}
+// 	}
 	
-	@Scheduled(cron = "*/5 * * * * *")
-	public void test() throws InterruptedException {
-		Order order = new Order();
-		order.setId((int) Math.floor(Math.random() * 55) + 1);
-		order.setQuantity(1);
-		restTemplate.postForObject("http://18.236.70.220:3500/inventory/purchase", order, Order.class);
-	}
+// 	@Scheduled(cron = "*/5 * * * * *")
+// 	public void test() throws InterruptedException {
+	
+// 	}
 
 }
