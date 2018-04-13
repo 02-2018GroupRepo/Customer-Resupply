@@ -42,15 +42,14 @@ public class CustomerApplication {
 		SpringApplication.run(CustomerApplication.class, args);
 	}
 
-// 	@Scheduled(cron = "1 * * * * *")
-// 	public void callDao() throws InterruptedException {
-
-		
-// 	}
+ 	@Scheduled(cron = "1 * * * * *")
+ 	public void callDao() throws InterruptedException {
+ 		storeService.sendOrder();
+ 	}
 	
-// 	@Scheduled(cron = "*/5 * * * * *")
-// 	public void test() throws InterruptedException {
-	
-// 	}
+ 	@Scheduled(cron = "*/5 * * * * *")
+ 	public void test() throws InterruptedException {
+ 		invoiceService.sendInvoice(productService.getAllProducts(), ${url});
+ 	}
 
 }

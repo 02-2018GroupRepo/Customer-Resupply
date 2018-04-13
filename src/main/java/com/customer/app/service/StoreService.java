@@ -17,8 +17,7 @@ public class StoreService {
 	private RestTemplate restTemplate;
 
 	public Hashtable<Integer, Integer> getStoreInventory() {
-		System.out.println("GET STORE INVENTORY");
-		return restTemplate.getForObject("http://192.168.88.11:8080/inventory/all", Hashtable.class);
+		return restTemplate.getForObject("url/inventory/all", Hashtable.class);
 	}
 
 	public Hashtable<Integer, Integer> createOrder(Hashtable<Integer, Integer> storeInventory) {
@@ -36,7 +35,7 @@ public class StoreService {
 			if (productQuantity > 0) {
 				orderMap.put(i, (int) (Math.floor(Math.random() * productQuantity) + 1));
 				Order order = new Order(i, (int) (Math.floor(Math.random() * productQuantity) + 1));
-				restTemplate.postForObject("http://192.168.88.11:8080/inventory/purchase", new Order(), Order.class);
+				restTemplate.postForObject("url/inventory/purchase", new Order(), Order.class);
 			}
 			i++;
 		} catch (Exception e) {
@@ -52,6 +51,6 @@ public class StoreService {
 		Hashtable<Integer, Integer> orderMap = this.createOrder(storeInventory);
 		
 		
-		//restTemplate.postForObject("http://192.168.88.11:8080/inventory/purchase", orderMap, HashMap.class);
+		restTemplate.postForObject("url/inventory/purchase", orderMap, HashMap.class);
 	}
 }
