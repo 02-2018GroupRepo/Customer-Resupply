@@ -30,7 +30,6 @@ public class StoreService {
 		while (orderMap.size() < 8) {
 		try {
 			
-			
 			int productQuantity = storeInventory.get(i + 1);
 			if (productQuantity > 0) {
 				orderMap.put(i, (int) (Math.floor(Math.random() * productQuantity) + 1));
