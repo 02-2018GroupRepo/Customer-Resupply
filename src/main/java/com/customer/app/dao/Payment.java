@@ -4,24 +4,16 @@ import java.math.BigDecimal;
 
 public class Payment {
 	
-//	private BigDecimal payment;
-//
-//	public BigDecimal getPayment() {
-//		return payment;
-//	}
-//
-//	public void setPayment(BigDecimal payment) {
-//		this.payment = payment;
-//	}
-	
-	private BigDecimal paymentForProduct;
+	private double paymentForProduct;
     private int invoiceId;
+    
+    
 
-    public BigDecimal getPaymentForProduct() {
+    public double getPaymentForProduct() {
         return paymentForProduct;
     }
 
-    public void setPaymentForProduct(BigDecimal paymentForProduct) {
+    public void setPaymentForProduct(double paymentForProduct) {
         this.paymentForProduct = paymentForProduct;
     }
 

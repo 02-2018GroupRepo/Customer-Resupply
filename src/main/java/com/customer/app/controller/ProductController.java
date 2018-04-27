@@ -41,7 +41,7 @@ public class ProductController {
 	@ResponseBody
 	public List<Product> recievePayment(@PathVariable int id, @RequestBody Payment paymentObject) {
 
-		List<Product> productList = localDao.validateTotal(id, paymentObject.getPaymentForProduct().doubleValue())
+		List<Product> productList = localDao.validateTotal(id, paymentObject.getPaymentForProduct())
 				? localDao.getProductList(id)
 				: new ArrayList<Product>();
 		return productList;

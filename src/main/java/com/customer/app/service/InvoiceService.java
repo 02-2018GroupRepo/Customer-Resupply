@@ -43,7 +43,7 @@ public class InvoiceService {
 			int invoiceId = (int) Math.floor(Math.random() * 100000000);
 			localDao.addInvoice(invoiceId, invoiceItemList);
 			try {
-				restTemplate.postForEntity("http://192.168.88.189:8080/inventory/receive", new Invoice(invoiceId, invoiceItemList), Invoice.class);
+				restTemplate.postForEntity("", new Invoice(invoiceId, invoiceItemList), Invoice.class);
 			} catch (Exception e) {
 				System.out.println(e);
 			}
